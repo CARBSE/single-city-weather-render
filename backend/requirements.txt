@@ -1,0 +1,11 @@
+flask==2.2.5
+pandas==2.1.2
+matplotlib==3.8.2
+numpy==1.26.2
+flask-caching==2.0.2
+openpyxl==3.1.2
+gunicorn==20.1.0
+flask-cors==4.0.1
+boto3==1.28.0
+pillow==10.1.0
+xlrd==2.0.1

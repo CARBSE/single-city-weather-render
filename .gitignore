@@ -1,0 +1,31 @@
+# make sure you're in the right folder
+pwd
+
+# create .gitignore (overwrites if exists; safe contents)
+@'
+# Python / environment
+__pycache__/
+*.pyc
+env/
+venv/
+.env
+
+# Data (do NOT commit data files)
+data_private/
+*.xlsx
+*.xls
+*.xlsm
+
+# Secrets / keys
+*.pem
+*.key
+aws_credentials*
+aws_secret*
+secrets.json
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+'@ > .gitignore
