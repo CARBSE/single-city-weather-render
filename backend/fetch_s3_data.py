@@ -1,14 +1,12 @@
-# fetch_s3_data.py
+# backend/fetch_s3_data.py
 import os
 from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 
-# defaults - safe for Render: bucket default and target dir in /tmp
-S3_BUCKET = os.environ.get("S3_BUCKET_NAME", "carbse-weather-data")
+S3_BUCKET = os.environ.get("S3_BUCKET_NAME")  # e.g. single-city-weather-data
 DATA_DIR = Path(os.environ.get("CARBSE_DATA_DIR", "/tmp/data_private"))
 AWS_REGION = os.environ.get("AWS_REGION", "ap-south-1")
-FORCE_DOWNLOAD = os.environ.get("FORCE_S3_DOWNLOAD", "0") == "1"
 
 FILES_TO_FETCH = [
     "AdaptiveModels.xlsx",
@@ -34,9 +32,6 @@ def fetch():
 
     for fname in FILES_TO_FETCH:
         dest = DATA_DIR / fname
-        if dest.exists() and not FORCE_DOWNLOAD:
-            print(f"Skipping existing file {dest} (set FORCE_S3_DOWNLOAD=1 to re-download)")
-            continue
         try:
             print(f"Downloading s3://{S3_BUCKET}/{fname} -> {dest}")
             s3.download_file(S3_BUCKET, fname, str(dest))
